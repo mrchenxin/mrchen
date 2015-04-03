@@ -1,6 +1,2 @@
 
-think you! 
-
-for you!
-
-下面开始写git笔记了！
+git笔记开始
