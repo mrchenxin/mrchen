@@ -1,0 +1,97 @@
+1.²é¿´±í½á¹¹
+desc user;
+
+create table user(
+  id int unsign zerofill(0Ìî³ä£¬£¬int(3)£¬Ç°Ãæ²»¹»3Î»Ê±£¬²¹È«)
+);
+
+×Ö¶ÎÊôÐÔ£º
+unsigned  
+zerofill 
+auto_increment  
+null 
+not null 
+default 
+
+
+char£¨n£©    ¶¨³¤×Ö·û  ËÙ¶È¿ì  Õ¼ÓÃn×Ö½Ú
+varchar(n) ²»¶¨³¤×Ö·û  ËÙ¶ÈÂý  ²»¶¨
+text  65535×Ö½Ú
+longtext  42ÒÚ×Ö½Ú
+
+½á¹¹»¯²éÑ¯ÓïÑÔsql°üº¬ËÄ¸ö²¿·Ö£º
+1.DDL   //Êý¾Ý¶¨Òå£¬create £¬drop £¬alter
+2.DML   //Êý¾Ý²Ù×÷£¬insert,update,delete
+3.DQL   //Êý¾Ý²éÑ¯£¬select
+4.DCL   //Êý¾Ý¿ØÖÆ£¬grant,commit,rollback
+
+
+\s  ²é¿´·þÎñÆ÷¶ËµÄÒ»Ð©»ù±¾ÐÅÏ¢
+show create database test  (²é¿´´´½¨ÊÇµÄÏêÏ¸ÐÅÏ¢)
+
+mysql ÅäÖÃÎÄ¼þÀï
+default-character-set = utf8  ¸ÄÏÂÄ¬ÈÏ  //¿Í»§¶ËºÍÁ¬½Ó×Ö·û¼¯
+character-set-server= utf8 //·þÎñÆ÷¡¢Êý¾Ý¿âºÍ±í×Ö·û¼¯
+collation=server = utf8_general_ci  //·þÎñÆ÷¡¢Êý¾Ý¿âºÍ±íÐ£Ñé×Ö·û¼¯
+
+phpÖÐÉèÖÃ¿Í»§¶ËºÍÁ¬½Ó×Ö·û¼¯
+header("set names utf8");
+
+//±í²Ù×÷
+alter table t1 add age int;       Ôö
+
+alter table t1 modify age varchar ¸Ä
+alter table t1 change age ages int
+
+alter table ti drop age           É¾
+
+//Ë÷Òý²Ù×÷
+show index from  user
+alter table user drop index in_name;
+alter table user add index in_name(name);
+
+//CURD
+insert into user(name) value("mrchen");
+update user set name="test",age=30 where id=1;
+delete from user where id=1;  (where  id in(1,3,5);  between 3 and 5; id>=3 and id<=5;)
+
+select-----
+  select  username as name from user;  (as »ò ¿Õ¸ñ ±ðÃû)
+  select distinct name from user;      (È¡Î¨Ò»Öµ)
+  
+  //Ä£ºý²éÑ¯.
+  select *from user where name like '%4%'
+  select *from user where name regexp '(.*4.*)|(.*5.*)'  ÕýÔòËÑË÷
+
+  //ÅÅÐò
+  order by 
+
+  //ÏÞÖÆ
+  limit
+
+  //Ëæ»úÊý
+  order by rand() limit 1;
+  
+  //Í³¼Æ
+  count(*)  sum(id)  avg(Æ½¾ùÊý)  max  min 
+
+  //·Ö×é¾ÛºÏ
+  grap by   (±ØÐëÐ´µ½having ºÍ order byÇ°Ãæ) having¶Ô·Ö×éºóµÄ½á¹û½øÐÐÉ¸Ñ¡
+  select name,count(id) from mess group by having name='mrchen' ordey by id;
+
+ ¶à±í²éÑ¯
+  1.ÆÕÍ¨¶à±í²éÑ¯£¨ÓÅÏÈ²éÑ¯£©
+  select * from user,post where user.id=post.uid; 
+  2.Ç¶Ì×²éÑ¯
+  select * from user whrere id in(select uid from post);
+  3.×ó²éÑ¯ÓÒ²éÑ¯£¨µÚ¶þÓÅÏÈ£©
+  select * from user left jion post where user.id=post.uid ;
+
+
+phpÏà¹Øº¯Êý
+  mysql_error() ´íÎóÐÅÏ¢
+  mysql_free_result();ÊÍ·Å½á¹û¼¯×ÊÔ´
+  mysql_insert_id()  ¸Õ¸Õ²åÈëºóµÄid
+  mysql_affected_rews µÃµ½insert£¬delete £¬updateÊÜÓ°ÏìµÄÐÐÊý
+  mysql_num_rows µÃµ½selectÓ°Ïìµ½µÄÐÐÊý
+  

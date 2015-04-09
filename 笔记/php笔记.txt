@@ -1,0 +1,107 @@
+1.修改session存活时间
+  修改php.ini  session_gc_maxlivetime=
+  代码修改：$lifetime=24*3600;  session_set_cookie_params($lifetime);
+
+2.找不到文件head
+  Head("HTTP/1.1 404 Not Found");  
+  200 一切正常
+  300 重定向
+  400  出现语法错误
+  401  未授权
+  403  没权限
+  500  服务器内部错误
+
+3.解析析构 
+  __construct __destruct
+
+4.引用变量 
+       allow_call_time_pass_reference boolen 设为 ON
+
+
+5.遍历文件夹
+   //测试遍历文件夹
+       $wenjian = "E:/PHPnow/test";
+       bianli($wenjian);
+       
+    function bianli($dir){
+      $handel = opendir($dir);
+
+     while (($readdir = readdir($handel)) !== false) {
+         # code...
+        if($readdir != ".." && $readdir !="."){
+         if (is_dir($dir."/".$readdir)) {
+           
+           echo $readdir."<br>";
+           bianli($dir."/".$readdir);
+           
+           # code...
+         }else{
+           echo "--".$readdir."<br>";
+         }
+        }
+
+       }      
+     }
+
+ 6.相对路径
+   //B对于A的相对路径
+    function xiagndui($file1,$file2){
+      $ar1 = explode("/",$file1);
+      $ar2 = explode("/",$file2);
+      $lujing = "";
+      $lenght = count($ar1)>count($ar2)?count($ar1):count($ar2);
+      for ($i=0; $i < $lenght; $i++) { 
+         if($ar1[$i] != $ar2[$i]) {
+
+            $lujing = "";
+            for ($j=0; $j < count($ar1)-$i; $j++) { 
+              $lujing .="../";
+            }
+            $lujing .= implode("/",array_slice($ar2, $i));
+            echo $lujing;
+            break;
+         }
+      }
+    }
+  $file1 = "aaa/ddd/ccc/ddd/test/a.js";
+  $file2 = "aaa/ddd/ccc/ddd/test/b.js";
+  echo xiagndui($file1,$file2);
+
+ 7、php中WEB上传文件的原理是什么，如何限制上传文件的大小?
+   move_uploaded_file   post_max_filesize
+
+ 8.对多个、多维数组排序
+   array_multisort();  //SORT_ASC SORT_DESC 
+
+ 9.apache 安装php模块
+   LoadModule php5_module "lujing"  AddType application/x-httpd-php.php
+
+ 10.ajax
+   var aj = XMLHttpRequest;  //第一步产生对象
+   aj.open("post","login.php");//第二步 确定发送方式和打开链接
+   aj.setRequestHeader('Content-type','text/html;charset=utf-8');
+   aj.setRequestHeader('Content-type','aplication/x-www-form-urlencoded');//第三步 解决字符集，或声明发送类型
+   aj.send('username=username&passwd=passwd');//第四步 发送数据
+   aj.onreadystatechange=function(){   //第五步 接受状态值
+      if(aj.readyState==4){   //第六步 判断状态
+        if(aj.status==200){   //第七步 成功后处理数据
+          alert('请求成功');
+        }
+      }
+   }
+
+   兼容性：
+    var xmlHttp = false;
+try {
+       xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+} catch (e) {
+              try {
+                            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+              } catch (e2) {
+                            xmlHttp = false;
+              }
+} 
+
+
+
+ 

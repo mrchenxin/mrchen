@@ -1,0 +1,49 @@
+window下使用git
+1.配置
+ git config --global user.name "mrchenxin"
+ git config --global user.email "286570912@qq.com"
+
+2.创建项目位置
+ mkdir E:\PHPnow\vhosts\gitxiangmu
+ cd E:\PHPnow\vhosts\gitxiangmu
+
+3.pwd  查看创建的路径
+
+4.部署
+  git init
+
+5.ls -ah 查看文件
+
+6.git add test.txt
+  git commit -m "write a readme file"
+
+7.查看状态
+  git status
+  git diff 查看具体修改细节
+
+8.提交
+  git add test.txt
+
+9.查看记录
+  git log   
+  git log --pretty=oneline
+
+10.回滚
+  git reset --hard HEAD^^ （回滚到100 HEAD~100）
+
+11.撤销修改
+  git checkout -- test.txt 
+
+
+12.远程连接
+  git remote add origin git@mrchenxin/mrchen.git
+  若出现问题   git config -l 看下配置是否有问题
+
+13.提交本地内容
+  git push -u origin master
+  git push origin master 从此就可以用这个了
+
+
+14.从远端 clone 下来  （创建时，勾选Initialize this repository with a README）
+  git clone git@github.ocm:mrchenxin/second.git
+
